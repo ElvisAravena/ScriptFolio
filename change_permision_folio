@@ -1,0 +1,33 @@
+import requests
+import json
+
+def obtiene_datos(path,file_name):
+ 
+ schema="perms/users/"
+
+ okapi_token= "PUT TOKEN"
+ okapi_tenant = "PUT TENANT"
+ okapi_url = "PUT URL OKAPI"
+ url = okapi_url + schema
+ with open(file_name) as archivo:
+
+    
+      for userid in archivo:
+        perm = {
+           "userId": userid,
+           "permissions": []
+        }
+        
+            
+        print(url, userid)
+        okapi_headers = {"x-okapi-token": okapi_token,"x-okapi-tenant": okapi_tenant,"content-type": "application/json"}
+        response = requests.request("POST", url, json=perm, headers=okapi_headers)
+
+    print(perm)                             
+
+
+if __name__ == "__main__":
+
+    path_dir: str=r"C:\permision"
+    filename="usuarios.txt"
+    obtiene_datos(path_dir,f"{path_dir}\{filename}")
